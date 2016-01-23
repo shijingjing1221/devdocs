@@ -46,6 +46,10 @@ module Docs
       result[:path]
     end
 
+    def original_url
+      result[:original_url]
+    end
+
     def build_entries(entries)
       entries.map do |attributes|
         build_entry(*attributes)
@@ -54,7 +58,7 @@ module Docs
 
     def build_entry(name, frag = nil, type = nil)
       type ||= self.type
-      Entry.new name, frag ? "#{path}##{frag}" : path, type
+      Entry.new name, frag ? "#{path}##{frag}" : path, type, original_url
     end
   end
 end

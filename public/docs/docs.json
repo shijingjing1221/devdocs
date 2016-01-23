@@ -1,1 +1,1 @@
-[]
+[{"name":"Rhel7","slug":"rhel7","type":"rhel7","version":"7","index_path":"rhel7/index.json","db_path":"rhel7/db.json","links":{"home":"https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/","code":"https://git.centos.org/project/rpms"},"mtime":1453556846,"db_size":3102293}]

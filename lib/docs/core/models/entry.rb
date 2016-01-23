@@ -1,15 +1,16 @@
 module Docs
   class Entry
-    attr_accessor :name, :type, :path
+    attr_accessor :name, :type, :path, :original_url
 
-    def initialize(name = nil, path = nil, type = nil)
+    def initialize(name = nil, path = nil, type = nil, original_url = nil)
       self.name = name
       self.path = path
       self.type = type
+      self.original_url = original_url
     end
 
     def ==(other)
-      other.name == name && other.path == path && other.type == type
+      other.name == name && other.path == path && other.type == type && other.original_url == original_url
     end
 
     def <=>(other)
@@ -29,7 +30,7 @@ module Docs
     end
 
     def as_json
-      { name: name, path: path, type: type }
+      { name: name, path: path, type: type, original_url: original_url }
     end
   end
 end

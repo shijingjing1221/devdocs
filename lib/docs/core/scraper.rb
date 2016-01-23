@@ -141,7 +141,7 @@ module Docs
     end
 
     def process_response(response)
-      data = {}
+      data = {:original_url => response.url.to_s}
       pipeline.call(parse(response.body), pipeline_context(response), data)
       data
     end
