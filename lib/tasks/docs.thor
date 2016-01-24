@@ -117,6 +117,18 @@ class DocsCLI < Thor
     puts 'Done'
   end
 
+  desc 'elastic <doc>', 'Generate a documentation for elasticsearch'
+  def elastic(name)
+
+    if Docs.elastic(name)
+      puts 'Done'
+    else
+      puts "Failed!"
+    end
+  rescue Docs::DocNotFound
+    invalid_doc(name)
+  end
+
   private
 
   def find_docs(names)
@@ -199,4 +211,5 @@ class DocsCLI < Thor
   def generate_manifest
     Docs.generate_manifest
   end
+
 end

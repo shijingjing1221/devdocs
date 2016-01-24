@@ -2,6 +2,7 @@ module Docs
   class Doc
     INDEX_FILENAME = 'index.json'
     DB_FILENAME = 'db.json'
+    ELASTIC_FILENAME = 'elastic.json'
 
     class << self
       include Instrumentable
@@ -30,6 +31,10 @@ module Docs
 
       def db_path
         File.join path, DB_FILENAME
+      end
+
+      def elastic_path
+        File.join path, ELASTIC_FILENAME
       end
 
       def as_json
@@ -75,6 +80,24 @@ module Docs
         end
       end
 
+      def elastic(store)
+        eIndex = ElasticIndex.new(10000)
+        store.replace(path) do
+           index = store.read(INDEX_FILENAME) || '{}'
+           entries = JSON.parse(index)["entries"]
+           entries.each do |entry|
+              # puts entry["path"]
+              f = store.read(entry["path"] + ".html")
+              doc = Nokogiri::HTML(f)
+              doc.css("pre").each do |pre|
+                eIndex.add(pre.content, [entry["name"]], "RHEL7 offical document", entry["original_url"])
+              end 
+           end
+        end
+        store.write(elastic_path, eIndex.to_s)
+        true
+      end
+
       private
 
       def store_page?(page)
@@ -100,5 +123,7 @@ module Docs
     def build_pages(&block)
       raise NotImplementedError
     end
+
+
   end
 end

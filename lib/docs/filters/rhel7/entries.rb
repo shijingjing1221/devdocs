@@ -6,7 +6,7 @@ module Docs
       }
 
       def get_name
-        at_css('.title').content
+        at_css('.title, h1').content
       end
 
       def get_type

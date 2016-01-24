@@ -16,10 +16,10 @@ module Docs
     html_filters.push 'rhel7/clean_html', 'rhel7/entries'
 
     options[:trailing_slash] = false
-    options[:skip] = %w(tools about ln-idp19057904.html)
+    options[:skip] = %w(tools about ln-idp19057904.html ix01.html)
 
     options[:attribution] = <<-HTML
-      &copy; 2015 Rdhat<br>
+      &copy; 2015 Redhat<br>
     HTML
   end
 end

@@ -50,6 +50,10 @@ module Docs
     find(name).store_page(store, page_id)
   end
 
+  def self.elastic(name)
+    find(name).elastic(store)
+  end
+
   def self.generate(name)
     find(name).store_pages(store)
   end
@@ -69,4 +73,5 @@ module Docs
       const_get("#{name}_subscriber".camelize).subscribe_to(self)
     end
   end
+
 end
