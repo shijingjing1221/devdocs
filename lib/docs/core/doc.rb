@@ -7,7 +7,7 @@ module Docs
     class << self
       include Instrumentable
 
-      attr_accessor :name, :slug, :type, :version, :abstract, :links
+      attr_accessor :name, :slug, :type, :version, :abstract, :links, :start_id
 
       def inherited(subclass)
         subclass.type = type
@@ -81,7 +81,7 @@ module Docs
       end
 
       def elastic(store)
-        eIndex = ElasticIndex.new(10000)
+        eIndex = ElasticIndex.new(@start_id)
         store.replace(path) do
            index = store.read(INDEX_FILENAME) || '{}'
            entries = JSON.parse(index)["entries"]
@@ -90,7 +90,7 @@ module Docs
               f = store.read(entry["path"] + ".html")
               doc = Nokogiri::HTML(f)
               doc.css("pre").each do |pre|
-                eIndex.add(pre.content, [entry["name"]], "RHEL7 offical document", entry["original_url"])
+                eIndex.add(pre.content, [entry["name"]], name + " offical document", entry["original_url"])
               end 
            end
         end

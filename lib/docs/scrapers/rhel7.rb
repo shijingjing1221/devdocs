@@ -5,6 +5,7 @@ module Docs
     self.name = 'RHEL7'
     self.type = 'rhel7'
     self.version = '7'
+    self.start_id = 10000
     # self.base_url = 'https://docs.fedoraproject.org/en-US/Fedora/18/html/System_Administrators_Guide/'
     self.base_url = 'https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/'
     self.root_path = 'index.html'
